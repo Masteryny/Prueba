@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\PacienteController;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -11,7 +13,9 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
+    Route::resource('pacientes',PacienteController::class);
+    Route::get('/dashboard',function() 
+    {
         return view('dashboard');
     })->name('dashboard');
 });
